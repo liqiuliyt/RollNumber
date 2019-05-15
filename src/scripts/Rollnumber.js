@@ -1,30 +1,38 @@
 // import { match } from "../../../../../Library/Caches/typescript/3.4.3/node_modules/@types/minimatch";
 
 class RollNumber {
-    constructor(options) {
-        this.el = options.el;
-        this.min = options.min;
-        this.max = options.max;
-        this.interval = options.interval;
-        this.autostart = options.autostart;
-        this.default = options.default;
+    constructor(option) {
+        this.defaults = {
+            'min': 0,
+            'max': 100,
+            'autostart': true,
+            'interval': 100,
+            'default': 0
+        };
+        this.options = Object.assign(this.defaults,option);
+        this.el = this.options.el;
+        this.min = this.options.min;
+        this.max = this.options.max;
+        this.interval = this.options.interval;
+        this.autostart = this.options.autostart;
+        this.default = this.options.default;
 
-        this.intervalName = null;
+        this._intervalName = null;
         if (this.autostart) {
             this.start();
-        }else{
+        } else {
             this.el.innerText = this.default;
         }
     }
 
 
 
-    start(value) {
-        this.intervalName && clearInterval(this.intervalName);
+    start() {
+        this._intervalName && clearInterval(this._intervalName);
         let allarray = [];
         let picknumber = [];
         let _this = this;
-        this.intervalName = setInterval(function () {
+        this._intervalName = setInterval(function () {
             _this.roll(allarray, picknumber);
         }, this.interval);
     }
@@ -39,13 +47,13 @@ class RollNumber {
     }
 
     stop(n) {
-        this.intervalName &&clearInterval(this.intervalName);
+        this._intervalName && clearInterval(this._intervalName);
         if (n) {
             this.el.innerText = n;
         }
     }
     reset() {
-        this.intervalName &&clearInterval(this.intervalName);
+        this._intervalName && clearInterval(this._intervalName);
         this.el.innerText = this.default;
     }
 }
