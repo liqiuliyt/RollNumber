@@ -1,40 +1,63 @@
 // import { match } from "../../../../../Library/Caches/typescript/3.4.3/node_modules/@types/minimatch";
 
 class PickNumber {
-    constructor(min = 5, max = 100, count = 2) {
-        this.min = min;
-        this.max = max;
-        this.count = count;
-        this.num=0;
-        this.allarray=[];
+    constructor(option) {
+
+        this.defaults = {
+            'min': 0,
+            'max': 100,
+            'count': 2,
+            'maxTimes': 100,
+        };
+
+        this.options = Object.assign(this.defaults, option);
+        this.min = this.options.min;
+        this.max = this.options.max;
+        this.count = this.options.count;
+        this.maxTimes = this.options.maxTimes;
+
+        this._num = 1;
+        this._allarray = [];
     }
+
     pick() {
-        let allarray = [];
-        let picknumber = [];
-        if(!this.num){
+        if (this._num===1) {
             for (let i = this.min; i <= this.max; i++) {
-                this.allarray.push(i);
-            }   
-            this.num=1;
+                this._allarray.push(i);
+            }  
         }
-        if(this.allarray.length>0){
+        if(this._num<=this.maxTimes){
+            this._num++;
+            return this.getPickNumber(); 
+        }
+        return null;
+    }
+    getPickNumber() {
+        let picknumber = [];
+        if (this._allarray.length >= this.count) {
             for (let j = 0; j < this.count; j++) {
-                let c = this.allarray[Math.floor(Math.random() * (this.allarray.length))];
-                picknumber.push(c);
-            }
-            this.allarray.forEach((item, index) => {
-                picknumber.map(element => {
-                    if (item == element) {
-                        this.allarray.splice(index, 1);
-                    }
+                picknumber.push(this._allarray[Math.floor(Math.random() * (this._allarray.length))]);
+                this._allarray.forEach((item, index) => {
+                    picknumber.map(element => {
+                        if (item == element) {
+                            this._allarray.splice(index, 1);
+                        }
+                    });
                 });
-            });
-        }
-        document.getElementById('pickContent').innerText = picknumber;
-        console.log(3333,picknumber);
-        console.log(4444,this.allarray);
+            }
+            return picknumber;
+        } 
+        return null;
     }
     reset() {
+        this._allarray=[];
+        this._num = 1;
+
+        this.options = this.defaults;
+        this.min = this.options.min;
+        this.max = this.options.max;
+        this.count = this.options.count;
+        this.maxTimes = this.options.maxTimes;
     }
 }
 export default PickNumber;
