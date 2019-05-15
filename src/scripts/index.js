@@ -12,7 +12,7 @@ let pick = document.getElementById('pick');
 
 let rollContent = document.getElementById('content');
 
-let options = {
+let rollOptions = {
     'el': rollContent,
     'min': 0,
     'max': 100,
@@ -21,8 +21,18 @@ let options = {
     'default':0
 };
 
-let rollnumber = new rollNumber(options);
-let saveNunber=[];
+let pickOptions = {
+    'el': rollContent,
+    'min': 0,
+    'max': 100,
+    'autostart': true,
+    'interval': 100,
+    'default':0,
+    
+
+};
+
+let rollnumber = new rollNumber(rollOptions);
 
 start.addEventListener('click', function () {
     rollnumber.start(true);
@@ -30,14 +40,15 @@ start.addEventListener('click', function () {
 
 stop.addEventListener('click', function () {
     rollnumber.stop();
-    
 }, false);
 
-stop.addEventListener('reset', function () {
+reset.addEventListener('click', function () {
      rollnumber.reset();
 }, false);
 
-var picknumber = new pickNumber();
+
+
+var picknumber = new pickNumber(pickOptions);
 pick.addEventListener('click', function () {
     picknumber.pick();
 }, false);
