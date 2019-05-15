@@ -5,7 +5,7 @@ class RollNumber {
         this.defaults = {
             'min': 0,
             'max': 100,
-            'autostart': true,
+            'autostart': false,
             'interval': 100,
             'default': 0
         };
@@ -50,7 +50,9 @@ class RollNumber {
         this._intervalName && clearInterval(this._intervalName);
         if (n) {
             this.el.innerText = n;
+            return false;
         }
+        this.el.innerText = this.default;
     }
     reset() {
         this._intervalName && clearInterval(this._intervalName);

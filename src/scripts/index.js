@@ -17,7 +17,7 @@ let rollOptions = {
     'el': rollContent,
     'min': 0,
     'max': 100,
-    'autostart': true,
+    'autostart': false,
     'interval': 100,
     'default':0
 };
@@ -36,7 +36,7 @@ start.addEventListener('click', function () {
 }, false);
 
 stop.addEventListener('click', function () {
-    rollnumber.stop();
+    rollnumber.stop(7);
 }, false);
 
 reset.addEventListener('click', function () {
