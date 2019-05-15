@@ -29,7 +29,7 @@ class PickNumber {
     }
 
     /**
-     * 选择出count个不重复数据
+     * 选择出count个不重复数据（min-max范围内）
      */
     pick() {
         if (this._num === 1) {
@@ -43,7 +43,7 @@ class PickNumber {
         }
         return null;
     }
-    
+
     // 选择数据并对已选数据进行过滤
     getPickNumber() {
         let picknumber = [];

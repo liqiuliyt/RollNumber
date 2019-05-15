@@ -33,7 +33,7 @@ class RollNumber {
     }
 
     /**
-     * @start 数据开始播放
+     * @start 数据开始播放(min-max范围数字)
      * 
      */
     start() {
