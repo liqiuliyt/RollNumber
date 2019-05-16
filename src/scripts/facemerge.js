@@ -5,32 +5,32 @@ class FaceMerge {
             'merge_rate ': 80
         };
         this.options = Object.assign(this.default, option);
-
+        this.template_url=this.options.template_url;
+        this.merge_url=this.options.merge_url;
+        this.merge_rate=this.options.merge_rate;
     }
     ajax() {
-        //    let _this=this;
         let params = {
             'api_key': 'Igeuu3TuNOvn3nmWCrolUKa0O8HVIh3w',
             'api_secret': 'jl4mGveq_b2v28qLHSXHFaVViUtQ0msq',
-            'template_url': 'https://cdn1.zhizhucms.com/materials/origin/938821c52259e1206925e57ec526fa80_origin.jpeg',
-            'merge_url': 'https://cdn1.zhizhucms.com/materials/origin/9beed908d40183cdfcf69a58255a91e3_origin.jpg',
-            'merge_rate': 80
+            'template_url': this.template_url,
+            'merge_url': this.merge_url,
+            'merge_rate': this.merge_rate
         };
         console.log(22222,params);
         var p = new Promise(function (resolve, reject) {  
             $.ajax({
                 url: 'https://api-cn.faceplusplus.com/imagepp/v1/mergeface',
-                type: 'POST',
-                dataType: "json",
-                data: params == null ? '' : JSON.stringify(params),
+                method: 'POST',
+                data: params == null ? '' : params,
                 async: true,
-                contentType: "application/json",
+                contentType: "application/x-www-form-urlencoded",
                 success: function (resp) {
-                    console.log(6666,XMLHttpRequest.status);
-                    callback(resp);
-                    resolve();
+                    // callback(resp);
+                    resolve(resp);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(1111,XMLHttpRequest, textStatus, errorThrown);
                     if (XMLHttpRequest.status == "401") {
                         // window.parent.location = '/enterprise/enterprise_login.html';
                         // self.location = '/enterprise/enterprise_login.html';
