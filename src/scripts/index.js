@@ -19,7 +19,7 @@ let pickContent=document.getElementById('pickContent');
 let rollOptions = {
     'el': rollContent,
     'min': 0,
-    'max': 100,
+    'max': 10,
     'autostart': false,
     'interval': 100,
     'default':0
@@ -35,26 +35,30 @@ let pickOptions = {
 let rollnumber = new rollNumber(rollOptions);
 
 start.addEventListener('click', function () {
-    rollnumber.start(true);
+    console.log(1111,rollnumber.start());
+    // typeof(num)==="number"
+    // console.log(1110,typeof(rollNumber.start()) === 'Number');
 }, false);
 
 stop.addEventListener('click', function () {
-    rollnumber.stop(7);
+    console.log(22222,rollnumber.stop(7));
 }, false);
 
 reset.addEventListener('click', function () {
-     rollnumber.reset();
+    console.log(3333, rollnumber.reset());
 }, false);
 
 
 var picknumber = new pickNumber(pickOptions);
 
 pick.addEventListener('click', function () {
-    pickContent.innerText = picknumber.pick();
+    console.log(5555,picknumber.pick());
+    // pickContent.innerText = picknumber.pick();
 }, false);
 
 resetPick.addEventListener('click', function () {
-    picknumber.reset();
+    console.log(66666,picknumber.reset());
+    // picknumber.reset();
 }, false);
 
 
@@ -72,6 +76,6 @@ let faceMerge = new faceMerges(
 );
 faceMerge.ajax().then(data=>{
     showImg[0].src='data:image/png;base64,'+data.result;
-    console.log(1111,data.result);
+    // console.log(1111,data.result);
 });
 

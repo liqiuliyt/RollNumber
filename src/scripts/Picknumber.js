@@ -1,13 +1,13 @@
-// import { match } from "../../../../../Library/Caches/typescript/3.4.3/node_modules/@types/minimatch";
-
 /**
  * 选择不重复数据
- * @min :number 变化数字的最小值 (默认值为0)
- * @max :number 变化数字的最大值 (默认值为100)
- * @count :number 提取多少个不重复的数字 (默认值为2)
- * @maxTimes :number 最多提取多少次数 (默认值为100) 
- * @_num :number pick次数  
- * @_allarray :array min-max范围内的所有数据
+ * @param {number=0} min 变化数字的最小值
+ * @param {number=100} max 变化数字的最大值
+ * @param {number=2} count 提取不重复的数字个数
+ * @param {number=100} maxTimes 最多提取次数
+ * @_num {number} 记录pick次数  
+ * @_allarray {array} min-max范围内的所有数据
+ * @example new PickNumber({param}).PickNumber()=>[,]
+ * @returns {Array} 
  */
 class PickNumber {
     constructor(option) {
@@ -76,6 +76,7 @@ class PickNumber {
         this.max = this.options.max;
         this.count = this.options.count;
         this.maxTimes = this.options.maxTimes;
+        return true;
     }
 }
 export default PickNumber;

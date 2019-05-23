@@ -1,11 +1,13 @@
 /**
  * 数据滚动
- * @el   dom对象， 轮播数字显示在该对象中 (必传）
- * @min :number 变化数字的最小值 (默认值为0)
- * @max :number 变化数字的最大值 (默认值为100)
- * @default :number 默认初始值 (0)
- * @autostart  :boolean 是否自动播放( 默认值为false:不自动播放）
- * @interval  :number  播放速度 （默认值为100）
+ * @param {object} el 轮播数字显示在该对象中 (必传）
+ * @param {number=0} min 最小值
+ * @param {number=100} max 最大值
+ * @param {number=0} default 默认初始值
+ * @param {boolean=false} autostart 是否自动播放
+ * @param {number=100} interval 播放速度ms
+ * @example new RollNumber({object}).start()=>
+ * @returns 
  */
 class RollNumber {
     constructor(option) {
@@ -39,11 +41,14 @@ class RollNumber {
     start() {
         this._intervalName && clearInterval(this._intervalName);
         let allarray = [];
-        let picknumber = [];
+        let picknumber = 7;
         let _this = this;
         this._intervalName = setInterval(function () {
-            _this.roll(allarray, picknumber);
+            
+           _this.roll(allarray, picknumber);
+          
         }, this.interval);
+        return picknumber;
     }
 
     // 播放时显示数据
@@ -53,12 +58,11 @@ class RollNumber {
             allarray.push(i);
         }
         picknumber = allarray[Math.floor(Math.random() * (allarray.length))];
-        this.el.innerText = picknumber;
     }
 
     /**
-     * @stop 数据停止播放
-     * @n 停止时显示值
+     * 数据停止播放
+     * @param {nember|null} n 停止时显示值
      */
     stop(n) {
         this._intervalName && clearInterval(this._intervalName);
@@ -70,12 +74,12 @@ class RollNumber {
     }
 
     /**
-     * @reset 重置
-     * 恢复到默认显示状态
+     *  重置:恢复到默认显示状态
      */
     reset() {
         this._intervalName && clearInterval(this._intervalName);
         this.el.innerText = this.default;
+        return true;
     }
 }
 export default RollNumber;
